@@ -1,6 +1,6 @@
 rateLimits:
-  minuteLimit: 50
-  hourlyLimit: 200
+  minuteLimit: 30
+  hourlyLimit: 100
 
 providers:
   - name: "Ipinfo"
