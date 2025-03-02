@@ -1,0 +1,29 @@
+rateLimits:
+  minuteLimit: 50
+  hourlyLimit: 200
+
+providers:
+  - name: "Ipinfo"
+    url: "https://ipinfo.io/%s?token=%s"
+    token: "IPINFO_TOKEN"
+    dailyLimit: 50000
+  - name: "ipstack"
+    url: "http://api.ipstack.com/%s?access_key=%s"
+    token: "IPSTACK_TOKEN"
+    dailyLimit: 5000
+  - name: "ipapi"
+    url: "http://ip-api.com/json/%s"
+    token: ""
+    dailyLimit: 1000
+  - name: "IpLocation"
+    url: "https://api.iplocation.net/?ip=%s"
+    token: ""
+    dailyLimit: 30000
+  - name: "IpGuide"
+    url: "https://ip.guide/%s"
+    token: ""
+    dailyLimit: 1500
+  - name: "Ip2Location"
+    url: "https://api.ip2location.io?ip=%s&key=%s"
+    token: "IP2LOCATION_TOKEN"
+    dailyLimit: 1500
