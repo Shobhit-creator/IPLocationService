@@ -5,15 +5,14 @@ URL="http://localhost:8080/api"
 REQUESTS=200
 
 for i in $(seq 1 $REQUESTS); do
-  response=$(curl -s -o /dev/stderr -w "%{http_code}" -H "X-Forwarded-For: $IP" $URL)
-  http_code=$(echo $response | tail -n 1) #get the http status code from the curl output.
+  response=$(curl -s -w "%{http_code}" -H "X-Forwarded-For: $IP" $URL)
+  http_code=$(echo "$response" | tail -n 1)
+  http_body=$(echo "$response" | head -n -1)
 
-  if [ "$http_code" -eq 429 ]; then #429 is http.StatusTooManyRequests
-    echo "Request $i failed: Too Many Requests (429)"
-  elif [ "$http_code" -eq 200 ] || [ "$http_code" -eq 201 ]; then #add other successful status codes as needed.
-    echo "Request $i successful (HTTP $http_code)"
+  if [[ "$http_code" =~ ^(2..) ]]; then # Check for 2xx success codes
+    echo "Request $i successful (HTTP $http_code) - Response: $http_body"
   else
-    echo "Request $i failed: HTTP $http_code"
+    echo "Request $i failed (HTTP $http_code) - Response: $http_body"
   fi
 done
 

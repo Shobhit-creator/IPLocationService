@@ -1,5 +1,5 @@
 rateLimits:
-  minuteLimit: 30
+  minuteLimit: 60
   hourlyLimit: 100
 
 providers:
